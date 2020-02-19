@@ -54,12 +54,14 @@ namespace DotnetIteration
     public static IEnumerable<string> StringyIndexes(List<string> data)
     {
       //throw new System.NotImplementedException();
-      var newList = new List<string>();
+      //var newList = new List<string>();
 
-      for (var i = 0; i < data.Count; i++)
-      {
-        newList.Add($"{data[i]} is at index {i}");
-      }
+      var newList = data.Select((inputString, i) => $"{inputString} is at index {i}");
+
+      // for (var i = 0; i < data.Count; i++)
+      // {
+      //   newList.Add($"{data[i]} is at index {i}");
+      // }
       return newList;
     }
     /*
@@ -81,15 +83,19 @@ namespace DotnetIteration
     public static IEnumerable<int> OnlyTheEvenIndexedSurvive(List<int> data)
     {
       //throw new System.NotImplementedException();
-      var newList = new List<int>();
+      //var newList = new List<int>();
 
-      for (var i = 0; i < data.Count; i++)
-      {
-        if (i % 2 == 0)
-        {
-          newList.Add(data[i]);
-        }
-      }
+      //var newList = data.Select((inputString, i) => $"{inputString} is at {i}");
+
+      var newList = data.Where((inputString, i) => i % 2 == 0).Select(inputString => inputString);
+
+      // for (var i = 0; i < data.Count; i++)
+      // {
+      //   if (i % 2 == 0)
+      //   {
+      //     newList.Add(data[i]);
+      //   }
+      // }
       return newList;
 
     }
@@ -109,16 +115,17 @@ namespace DotnetIteration
     public static IEnumerable<string> BestMovieOfTheYear(List<Movie> data, int year)
     {
       //throw new System.NotImplementedException();
-      var bestMovies = new List<string>();
 
-      foreach (var movie in data)
-      {
-        if (movie.Year == year && movie.Score > 90)
-        {
-          bestMovies.Add(movie.Name);
-        }
-      }
+      var bestMovies = data.Where(movie => movie.Score > 90 && movie.Year == year).Select(movie => movie.Name);
       return bestMovies;
+      // foreach (var movie in data)
+      // {
+      //   if (movie.Year == year && movie.Score > 90)
+      //   {
+      //     bestMovies.Add(movie.Name);
+      //   }
+      // }
+      // return bestMovies;
 
     }
 
@@ -132,16 +139,18 @@ namespace DotnetIteration
     {
       //throw new System.NotImplementedException();
       // var evenList = data.Where(number => number % 2 == 0);
-      var allOdd = true;
+      var areThereEvens = data.Any(number => number % 2 == 0);
+      //var hasEvens = data.Any(number => number % 2 == 0, allOdd = false);
+      return areThereEvens;
 
-      foreach (var inNumber in data)
-      {
-        if (inNumber % 2 == 0)
-        {
-          allOdd = false;
-        }
-      }
-      return allOdd;
+      // foreach (var inNumber in data)
+      // {
+      //   if (inNumber % 2 == 0)
+      //   {
+      //     allOdd = false;
+      //   }
+      // }
+      // return allOdd;
 
     }
     /*
@@ -153,16 +162,19 @@ namespace DotnetIteration
     {
       //throw new System.NotImplementedException();
 
-      var returnString = "";
+      //var returnString = "";
 
-      foreach (var inputString in data)
-      {
-        if (inputString.IndexOf("needle") > 0)
-        {
-          returnString = inputString;
-        }
-      }
+      var returnString = data.First(inString => inString.IndexOf("needle") > 0);
       return returnString;
+
+      // foreach (var inputString in data)
+      // {
+      //   if (inputString.IndexOf("needle") > 0)
+      //   {
+      //     returnString = inputString;
+      //   }
+      // }
+      // return returnString;
     }
 
 
@@ -177,14 +189,19 @@ namespace DotnetIteration
       //throw new System.NotImplementedException();
       var returnIndex = 0;
 
-      for (var i = 0; i < data.Count; i++)
-      {
-        if (data[i].IndexOf("needle") > 0)
-        {
-          returnIndex = i;
-        }
-      }
+
+      returnIndex = data.First((incoming, i) => incoming.IndexOf("needle") > 0).Select(incoming => incoming);
       return returnIndex;
+      //var newList = data.Where((inputString, i) => i % 2 == 0).Select(inputString => inputString);
+
+      // for (var i = 0; i < data.Count; i++)
+      // {
+      //   if (data[i].IndexOf("needle") > 0)
+      //   {
+      //     returnIndex = i;
+      //   }
+      // }
+      // return returnIndex;
     }
 
     /*
